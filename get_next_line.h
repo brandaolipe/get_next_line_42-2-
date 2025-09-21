@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: febranda <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: febranda <febranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 14:20:33 by febranda          #+#    #+#             */
-/*   Updated: 2025/09/19 20:04:52 by febranda         ###   ########.fr       */
+/*   Updated: 2025/09/21 15:25:43 by febranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ size_t	ft_strlen(const char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*extract_line(char	*buffer);
 char	*rearrange_buffer(char *buffer);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
 #endif

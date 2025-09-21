@@ -6,7 +6,7 @@
 /*   By: febranda <febranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 14:03:58 by febranda          #+#    #+#             */
-/*   Updated: 2025/09/19 20:14:53 by febranda         ###   ########.fr       */
+/*   Updated: 2025/09/21 16:55:05 by febranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*fill_buffer(char *buffer, int fd)
 		temp = buffer;
 	}
 	buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
-	while (!ft_strchr(buffer, '\n') && bytes_read != 0)
+	while (!ft_strchr(buffer, '\n') && bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		temp = ft_strjoin(temp, buffer);
@@ -55,14 +55,15 @@ char	*extract_line(char	*buffer)
 	len_new_line = 0;
 	while (buffer[i])
 	{
-		len_new_line++;
 		i++;
 		if (buffer[i] == '\n')
 			break ;
+		len_new_line++;
 	}
 	i = 0;
-	new_line = ft_calloc((len_new_line + 1), sizeof(char));
-	while (*buffer)
+	new_line = (char *)ft_calloc((len_new_line + 2), sizeof(char));
+	//ft_strlcpy(new_line, buffer, len_new_line);
+	while (buffer[i])
 	{
 		new_line[i] = buffer[i];
 		if (buffer[i] == '\n')

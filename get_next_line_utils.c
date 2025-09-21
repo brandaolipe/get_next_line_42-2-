@@ -6,7 +6,7 @@
 /*   By: febranda <febranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:17:26 by febranda          #+#    #+#             */
-/*   Updated: 2025/09/18 18:59:44 by febranda         ###   ########.fr       */
+/*   Updated: 2025/09/21 15:25:47 by febranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	size_t			i;
 	unsigned char	*ptr;
 
+	i = 0;
 	if (nmemb == 0 || size == 0)
 	{
 		ptr = malloc(0);
@@ -85,4 +86,22 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		i++;
 	}
 	return ((void *)ptr);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	size_src;
+
+	size_src = ft_strlen(src);
+	i = 0;
+	if (size == 0)
+		return (size_src);
+	while (src[i] && i < size - 1)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (size_src);
 }
