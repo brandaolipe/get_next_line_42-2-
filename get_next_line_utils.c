@@ -6,7 +6,7 @@
 /*   By: febranda <febranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:17:26 by febranda          #+#    #+#             */
-/*   Updated: 2025/09/23 18:49:43 by febranda         ###   ########.fr       */
+/*   Updated: 2025/09/23 20:02:20 by febranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1)
 		s1 = "";
 	len = ft_strlen(s1) + ft_strlen(s2);
-	new_str = malloc(len + 1);
+	new_str = ft_calloc(len + 1, sizeof(char));
 	if (!new_str)
-		return(NULL);
+		return (NULL);
 	while (s1[i])
 	{
 		new_str[i] = s1[i];

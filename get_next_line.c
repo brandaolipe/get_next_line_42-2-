@@ -6,7 +6,7 @@
 /*   By: febranda <febranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 14:03:58 by febranda          #+#    #+#             */
-/*   Updated: 2025/09/23 18:54:48 by febranda         ###   ########.fr       */
+/*   Updated: 2025/09/23 20:00:34 by febranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ char	*get_next_line(int fd)
 	char		*next_line;
 
 	buffer = fill_buffer(buffer, fd);
-	if(!buffer[0])
+	if (!buffer[0])
 	{
 		free(buffer);
-		return(NULL);
+		return (NULL);
 	}
 	next_line = extract_line(buffer);
 	buffer = rearrange_buffer(buffer);
@@ -93,18 +93,17 @@ char	*rearrange_buffer(char *buffer)
 		if (*buffer == '\n')
 		{
 			buffer++;
-			break;
+			break ;
 		}
 		buffer++;
 	}
 	len_str = ft_strlen(buffer);
 	str = ft_calloc((len_str + 1), sizeof(char));
-	i = 0;
-	while (buffer[i])
-	{
+	if (!str)
+		return (NULL);
+	i = -1;
+	while (buffer[i++])
 		str[i] = buffer[i];
-		i++;
-	}
 	buffer = ft_strdup(str);
 	free(str);
 	return (buffer);
@@ -112,8 +111,8 @@ char	*rearrange_buffer(char *buffer)
 
 void	ft_bzero(void *s, size_t n)
 {
-	int				i;
-	unsigned char	*ptr;
+	size_t				i;
+	unsigned char		*ptr;
 
 	ptr = (unsigned char *)s;
 	i = 0;

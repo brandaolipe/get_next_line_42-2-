@@ -8,7 +8,7 @@ int main(void)
     int fd;
     char    *str;
 
-    fd = open("arquivo2.txt", O_RDONLY);
+    fd = open("arquivo1.txt", O_RDONLY);
     //fd = open("arquivo1.txt", O_RDONLY);
     //fd = 0;
     //fd = 9;
