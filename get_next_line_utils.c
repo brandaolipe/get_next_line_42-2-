@@ -6,7 +6,7 @@
 /*   By: febranda <febranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:17:26 by febranda          #+#    #+#             */
-/*   Updated: 2025/09/21 15:25:47 by febranda         ###   ########.fr       */
+/*   Updated: 2025/09/23 18:49:43 by febranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = 0;
 	j = 0;
+	if (!s1)
+		s1 = "";
 	len = ft_strlen(s1) + ft_strlen(s2);
 	new_str = malloc(len + 1);
+	if (!new_str)
+		return(NULL);
 	while (s1[i])
 	{
 		new_str[i] = s1[i];
@@ -54,6 +58,7 @@ size_t	ft_strlen(const char *str)
 {
 	size_t	len;
 
+	len = 0;
 	while (*str)
 	{
 		len++;
@@ -88,20 +93,22 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return ((void *)ptr);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_strdup(const char *str)
 {
-	size_t	i;
-	size_t	size_src;
+	char	*new_str;
+	int		i;
+	int		len;
 
-	size_src = ft_strlen(src);
+	len = ft_strlen(str);
+	new_str = malloc(len + 1);
+	if (new_str == NULL)
+		return (NULL);
 	i = 0;
-	if (size == 0)
-		return (size_src);
-	while (src[i] && i < size - 1)
+	while (str[i])
 	{
-		dst[i] = src[i];
+		new_str[i] = str[i];
 		i++;
 	}
-	dst[i] = '\0';
-	return (size_src);
+	new_str[i] = '\0';
+	return (new_str);
 }
