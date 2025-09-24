@@ -6,7 +6,7 @@
 /*   By: febranda <febranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 14:03:58 by febranda          #+#    #+#             */
-/*   Updated: 2025/09/23 20:00:34 by febranda         ###   ########.fr       */
+/*   Updated: 2025/09/24 19:50:20 by febranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*next_line;
 
-	buffer = fill_buffer(buffer, fd);
-	if (!buffer[0])
-	{
-		free(buffer);
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	}
+	buffer = fill_buffer(buffer, fd);
+	if (!buffer || (!buffer[0]))
+		return (NULL);
 	next_line = extract_line(buffer);
 	buffer = rearrange_buffer(buffer);
 	return (next_line);
@@ -34,23 +33,21 @@ char	*fill_buffer(char *buffer, int fd)
 	char	*temp;
 
 	bytes_read = 1;
-	temp = buffer;
-	buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	temp =  ft_calloc((BUFFER_SIZE + 1), sizeof(char)); 
+	if (!buffer)
+		buffer = ft_strdup("");
 	while (!ft_strchr(buffer, '\n') && bytes_read > 0)
 	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		bytes_read = read(fd, temp, BUFFER_SIZE);
 		if (bytes_read < 0)
 		{
+			free(temp);
 			free(buffer);
 			return (NULL);
 		}
-		temp = ft_strjoin(temp, buffer);
-		ft_bzero(buffer, BUFFER_SIZE);
-		if (bytes_read < BUFFER_SIZE)
-			break ;
+		buffer = ft_strjoin(buffer, temp);
+		ft_bzero(temp, BUFFER_SIZE);
 	}
-	free(buffer);
-	buffer = ft_strdup(temp);
 	free(temp);
 	return (buffer);
 }
@@ -85,28 +82,21 @@ char	*extract_line(char	*buffer)
 char	*rearrange_buffer(char *buffer)
 {
 	char	*str;
-	int		len_str;
 	int		i;
 
-	while (*buffer)
+	i = 0;
+	while (buffer[i])
 	{
-		if (*buffer == '\n')
+		if (buffer[i] == '\n')
 		{
-			buffer++;
+			i++;
 			break ;
 		}
-		buffer++;
+		i++;
 	}
-	len_str = ft_strlen(buffer);
-	str = ft_calloc((len_str + 1), sizeof(char));
-	if (!str)
-		return (NULL);
-	i = -1;
-	while (buffer[i++])
-		str[i] = buffer[i];
-	buffer = ft_strdup(str);
-	free(str);
-	return (buffer);
+	str = ft_strdup(&buffer[i]);
+	free(buffer);
+	return (str);
 }
 
 void	ft_bzero(void *s, size_t n)

@@ -6,7 +6,7 @@
 /*   By: febranda <febranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:17:26 by febranda          #+#    #+#             */
-/*   Updated: 2025/09/23 20:02:20 by febranda         ###   ########.fr       */
+/*   Updated: 2025/09/24 19:02:10 by febranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	j = 0;
 	if (!s1)
-		s1 = "";
+		s1 = ft_strdup("");
 	len = ft_strlen(s1) + ft_strlen(s2);
 	new_str = ft_calloc(len + 1, sizeof(char));
 	if (!new_str)
@@ -51,6 +51,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	new_str[i + j] = '\0';
+	free((void *)s1);
 	return (new_str);
 }
 
