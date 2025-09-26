@@ -6,7 +6,7 @@
 /*   By: febranda <febranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 14:03:58 by febranda          #+#    #+#             */
-/*   Updated: 2025/09/24 19:50:20 by febranda         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:03:29 by febranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buffer = fill_buffer(buffer, fd);
 	if (!buffer || (!buffer[0]))
+	{
+		if (buffer)
+			free(buffer);
+		buffer = NULL;
 		return (NULL);
+	}
 	next_line = extract_line(buffer);
 	buffer = rearrange_buffer(buffer);
 	return (next_line);
@@ -33,7 +38,7 @@ char	*fill_buffer(char *buffer, int fd)
 	char	*temp;
 
 	bytes_read = 1;
-	temp =  ft_calloc((BUFFER_SIZE + 1), sizeof(char)); 
+	temp = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!buffer)
 		buffer = ft_strdup("");
 	while (!ft_strchr(buffer, '\n') && bytes_read > 0)
@@ -41,8 +46,8 @@ char	*fill_buffer(char *buffer, int fd)
 		bytes_read = read(fd, temp, BUFFER_SIZE);
 		if (bytes_read < 0)
 		{
-			free(temp);
 			free(buffer);
+			free(temp);
 			return (NULL);
 		}
 		buffer = ft_strjoin(buffer, temp);

@@ -6,7 +6,7 @@
 /*   By: febranda <febranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 14:20:33 by febranda          #+#    #+#             */
-/*   Updated: 2025/09/24 18:36:35 by febranda         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:14:15 by febranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 777
+#  define BUFFER_SIZE 7
 # endif
 
 char	*get_next_line(int fd);

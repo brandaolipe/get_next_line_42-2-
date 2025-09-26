@@ -6,7 +6,7 @@
 /*   By: febranda <febranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 14:17:26 by febranda          #+#    #+#             */
-/*   Updated: 2025/09/24 19:02:10 by febranda         ###   ########.fr       */
+/*   Updated: 2025/09/26 14:15:41 by febranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	*ft_strchr(const char *str, int letter)
 {
+	if (!str)
+		return (NULL);
 	while (*str)
 	{
 		if (*str == (char)letter)
@@ -32,24 +34,18 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	i;
 	size_t	j;
 
-	i = 0;
-	j = 0;
+	i = -1;
+	j = -1;
 	if (!s1)
 		s1 = ft_strdup("");
 	len = ft_strlen(s1) + ft_strlen(s2);
 	new_str = ft_calloc(len + 1, sizeof(char));
 	if (!new_str)
 		return (NULL);
-	while (s1[i])
-	{
+	while (s1[++i])
 		new_str[i] = s1[i];
-		i++;
-	}
-	while (s2[j])
-	{
+	while (s2[++j])
 		new_str[i + j] = s2[j];
-		j++;
-	}
 	new_str[i + j] = '\0';
 	free((void *)s1);
 	return (new_str);
