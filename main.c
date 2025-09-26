@@ -8,11 +8,11 @@ int main(void)
     int fd;
     char    *str;
 
-    fd = open("arquivo2.txt", O_RDONLY);
+    fd = open("arquivo1.txt", O_RDONLY);
     //fd = open("arquivo1.txt", O_RDONLY);
     //fd = 0;
     //fd = 9;
-    while ((str = get_next_line(5)))
+    while ((str = get_next_line(fd)))
     {
         printf("%s", str);
         free(str);
